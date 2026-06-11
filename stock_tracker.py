@@ -29,10 +29,16 @@ def analyze_stock(code, name):
     if hist.empty or len(hist) < 2:
         return f"\n❌ {name}({code}) 無法取得資料"
 
-    today = hist["Close"].iloc[-1]
+    today_data = hist.iloc[-1]
+    today = today_data["Close"]
     prev  = hist["Close"].iloc[-2]
     change = today - prev
     pct    = change / prev * 100
+
+    # 新增：開盤價、最高價、最低價
+    open_price = today_data["Open"]
+    high_price = today_data["High"]
+    low_price = today_data["Low"]
 
     if change > 0:
         arrow = "🔴▲"
@@ -48,8 +54,11 @@ def analyze_stock(code, name):
     lines = [
         f"\n━━━━━━━━━━━━━━━━",
         f"{arrow} {name}（{code.replace('.TW','')}）",
+        f"開盤：{open_price:.1f} 元",
         f"收盤：{today:.1f} 元",
         f"漲跌：{change:+.1f} 元（{pct:+.2f}%）",
+        f"今日最高：{high_price:.1f} 元",
+        f"今日最低：{low_price:.1f} 元",
     ]
 
     if ma5:
