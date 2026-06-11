@@ -1,5 +1,5 @@
 name: Stock Tracker
-
+ 
 on:
   push:
     branches: [main]
