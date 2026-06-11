@@ -1,6 +1,6 @@
 import yfinance as yf
 import requests
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 # ── 設定區 ──────────────────────────────────────
 BOT_TOKEN = "8880925248:AAGFtxCPx-AYYU4oJmxkno6h6MutCIm96Zs"
@@ -66,7 +66,10 @@ def analyze_stock(code, name):
     return "\n".join(lines)
 
 def main():
-    now = datetime.now().strftime("%Y/%m/%d %H:%M")
+    # 台灣時區 (UTC+8)
+    taiwan_tz = timezone(timedelta(hours=8))
+    now = datetime.now(taiwan_tz).strftime("%Y/%m/%d %H:%M")
+    
     msg = f"📊 每日股票報告\n🕐 {now}"
 
     for code, name in STOCKS:
