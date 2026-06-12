@@ -10,6 +10,8 @@ STOCKS = [
     ("2330.TW", "台積電"),
     ("2317.TW", "鴻海"),
     ("2454.TW", "聯發科"),
+    ("0050.TW", "台灣元大五十"),
+    ("0052.TW", "富邦科技"),
 ]
 # ────────────────────────────────────────────────
 
@@ -35,7 +37,7 @@ def analyze_stock(code, name):
     change = today - prev
     pct    = change / prev * 100
 
-    # 新增：開盤價、最高價、最低價
+    # 開盤價、最高價、最低價
     open_price = today_data["Open"]
     high_price = today_data["High"]
     low_price = today_data["Low"]
